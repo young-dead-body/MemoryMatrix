@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,25 +27,41 @@ namespace MemoryMatrix
 
         //public PictureBox[] pictureBox => Controls.OfType<PictureBox>().ToArray();
 
-        PictureBox[] pictureBoxes = new PictureBox[16];
+        PictureBox[] pictureBoxes;
+
         void arrayInitialization()
         {
-            pictureBoxes[0] = pictureBox1;
-            pictureBoxes[1] = pictureBox2;
-            pictureBoxes[2] = pictureBox3;
-            pictureBoxes[3] = pictureBox4;
-            pictureBoxes[4] = pictureBox5;
-            pictureBoxes[5] = pictureBox6;
-            pictureBoxes[6] = pictureBox7;
-            pictureBoxes[7] = pictureBox8;
-            pictureBoxes[8] = pictureBox9;
-            pictureBoxes[9] = pictureBox10;
-            pictureBoxes[10] = pictureBox11;
-            pictureBoxes[11] = pictureBox12;
-            pictureBoxes[12] = pictureBox13;
-            pictureBoxes[13] = pictureBox14;
-            pictureBoxes[14] = pictureBox15;
-            pictureBoxes[15] = pictureBox16;
+            if (checkBox1.Checked) {
+                pictureBoxes = new PictureBox[4];
+                pictureBoxes[0] = pictureBox1;
+                pictureBoxes[1] = pictureBox2;
+                pictureBoxes[2] = pictureBox3;
+                pictureBoxes[3] = pictureBox4;
+            }
+            if (checkBox2.Checked)
+            {
+                pictureBoxes = new PictureBox[16];
+                pictureBoxes[0] = pictureBox1;
+                pictureBoxes[1] = pictureBox2;
+                pictureBoxes[2] = pictureBox3;
+                pictureBoxes[3] = pictureBox4;
+                pictureBoxes[4] = pictureBox5;
+                pictureBoxes[5] = pictureBox6;
+                pictureBoxes[6] = pictureBox7;
+                pictureBoxes[7] = pictureBox8;
+                pictureBoxes[8] = pictureBox9;
+                pictureBoxes[9] = pictureBox10;
+                pictureBoxes[10] = pictureBox11;
+                pictureBoxes[11] = pictureBox12;
+                pictureBoxes[12] = pictureBox13;
+                pictureBoxes[13] = pictureBox14;
+                pictureBoxes[14] = pictureBox15;
+                pictureBoxes[15] = pictureBox16;
+            }
+            for (int i = 0; i < pictureBoxes.Length; i++) 
+            {
+                pictureBoxes[i].Tag = null;
+            }
         }
 
         private static IEnumerable<Image> images
@@ -128,10 +145,14 @@ namespace MemoryMatrix
 
         private void setRandomImages()
         {
+            int i = 0;
             foreach (var image in images)
             {
                 getFreeSlot().Tag = image;
+                i++;
                 getFreeSlot().Tag = image;
+                i++;
+                if (i == pictureBoxes.Length) { return; }
             }
         }
 
@@ -175,9 +196,23 @@ namespace MemoryMatrix
 
             firstGuess = null;
             if (pictureBoxes.Any(p => p.Visible)) return;
-            MessageBox.Show("Вы выиграли. Хотите продолжить?");
-            timer.Stop();
-            ResetImages();
+
+            DialogResult result = MessageBox.Show(
+            "Вы выиграли. Хотите продолжить?",
+            "Сообщение",
+            MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                timer.Stop();
+                ResetImages();
+            }
+            else {
+                ResetImages();
+                timer.Stop();
+                label1.Text = $"00:60";
+            }
+
         }
 
         private void startGame(object sender, EventArgs e)
@@ -195,18 +230,10 @@ namespace MemoryMatrix
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             checkBox2.Checked = false;
-            checkBox3.Checked = false;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox1.Checked = false;
-            checkBox3.Checked = false;
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            checkBox2.Checked = false;
             checkBox1.Checked = false;
         }
     }
