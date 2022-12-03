@@ -256,7 +256,7 @@ namespace MemoryMatrix
             // 
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(623, 334);
+            this.panel2.Location = new System.Drawing.Point(633, 401);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(250, 125);
             this.panel2.TabIndex = 3;
