@@ -77,7 +77,17 @@ namespace MemoryMatrix
                 }
 
                 var ssTime = TimeSpan.FromSeconds(time);
-                label1.Text = $"00:{time.ToString()}";
+
+                int seconds = time;
+                if (seconds > 15)
+                {
+                    label1.ForeColor = Color.Black;
+                }
+                else 
+                {
+                    label1.ForeColor = Color.Red;
+                }
+                label1.Text = $"00:{seconds}";
             };
         }
 
@@ -176,5 +186,22 @@ namespace MemoryMatrix
             button1.Enabled = false;
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox3.Checked = false;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox2.Checked = false;
+            checkBox1.Checked = false;
+        }
     }
 }
