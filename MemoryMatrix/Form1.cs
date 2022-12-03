@@ -27,23 +27,24 @@ namespace MemoryMatrix
         //public PictureBox[] pictureBox => Controls.OfType<PictureBox>().ToArray();
 
         PictureBox[] pictureBoxes = new PictureBox[16];
-        void arrayInitialization() {
+        void arrayInitialization()
+        {
             pictureBoxes[0] = pictureBox1;
             pictureBoxes[1] = pictureBox2;
             pictureBoxes[2] = pictureBox3;
             pictureBoxes[3] = pictureBox4;
             pictureBoxes[4] = pictureBox5;
-            pictureBoxes [5] = pictureBox6;
-            pictureBoxes [6] = pictureBox7;
-            pictureBoxes [7] = pictureBox8;
-            pictureBoxes [8] = pictureBox9;
-            pictureBoxes [9] = pictureBox10;
-            pictureBoxes [10] = pictureBox11;
-            pictureBoxes [11] = pictureBox12;
-            pictureBoxes [12] = pictureBox13;
-            pictureBoxes [13] = pictureBox14;
-            pictureBoxes [14] = pictureBox15;
-            pictureBoxes [15] = pictureBox16;
+            pictureBoxes[5] = pictureBox6;
+            pictureBoxes[6] = pictureBox7;
+            pictureBoxes[7] = pictureBox8;
+            pictureBoxes[8] = pictureBox9;
+            pictureBoxes[9] = pictureBox10;
+            pictureBoxes[10] = pictureBox11;
+            pictureBoxes[11] = pictureBox12;
+            pictureBoxes[12] = pictureBox13;
+            pictureBoxes[13] = pictureBox14;
+            pictureBoxes[14] = pictureBox15;
+            pictureBoxes[15] = pictureBox16;
         }
 
         private static IEnumerable<Image> images
@@ -83,7 +84,7 @@ namespace MemoryMatrix
                 {
                     label1.ForeColor = Color.Black;
                 }
-                else 
+                else
                 {
                     label1.ForeColor = Color.Red;
                 }
@@ -103,6 +104,7 @@ namespace MemoryMatrix
             setRandomImages();
             time = 60;
             timer.Start();
+            button1.Enabled = true;
         }
 
         private void HideImages()
@@ -112,12 +114,13 @@ namespace MemoryMatrix
                 pic.Image = resources.question;
             }
         }
-                
+
         private PictureBox getFreeSlot()
         {
             int num;
 
-            do {
+            do
+            {
                 num = rnd.Next(0, pictureBoxes.Count());
             } while (pictureBoxes[num].Tag != null); // ПОЧЕМУ ТУТ ОШИБКА
             return pictureBoxes[num];
@@ -131,7 +134,7 @@ namespace MemoryMatrix
                 getFreeSlot().Tag = image;
             }
         }
-        
+
 
         private void CKLICKTIMER_TICK(object sender, EventArgs e) // хз пока что
         {
@@ -147,7 +150,8 @@ namespace MemoryMatrix
 
             var pic = (PictureBox)sender;
 
-            if (firstGuess == null) {
+            if (firstGuess == null)
+            {
                 firstGuess = pic;
                 pic.Image = (Image)pic.Tag;
                 return;
@@ -163,7 +167,8 @@ namespace MemoryMatrix
                 }
                 HideImages();
             }
-            else {
+            else
+            {
                 allowClick = false;
                 clickTimer.Start();
             }
@@ -171,7 +176,8 @@ namespace MemoryMatrix
             firstGuess = null;
             if (pictureBoxes.Any(p => p.Visible)) return;
             MessageBox.Show("Вы выиграли. Хотите продолжить?");
-            startGameTimer();
+            timer.Stop();
+            ResetImages();
         }
 
         private void startGame(object sender, EventArgs e)

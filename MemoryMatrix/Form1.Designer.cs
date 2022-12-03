@@ -47,13 +47,13 @@ namespace MemoryMatrix
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
@@ -269,6 +269,49 @@ namespace MemoryMatrix
             this.panel2.Size = new System.Drawing.Size(250, 564);
             this.panel2.TabIndex = 3;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.checkBox3);
+            this.panel3.Controls.Add(this.checkBox1);
+            this.panel3.Controls.Add(this.checkBox2);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(250, 162);
+            this.panel3.TabIndex = 4;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 39);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(149, 24);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Первый уровень";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(13, 69);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(144, 24);
+            this.checkBox2.TabIndex = 2;
+            this.checkBox2.Text = "Второй уровень";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(227, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Пожалуйста выберите уровень";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -289,59 +332,16 @@ namespace MemoryMatrix
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.startGame);
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.checkBox1);
-            this.panel3.Controls.Add(this.checkBox3);
-            this.panel3.Controls.Add(this.checkBox2);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(250, 162);
-            this.panel3.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(227, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Пожалуйста выберите уровень";
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 69);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(144, 24);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "Второй уровень";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(13, 99);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(142, 24);
-            this.checkBox3.TabIndex = 3;
-            this.checkBox3.Text = "Третий уровень";
+            this.checkBox3.Size = new System.Drawing.Size(144, 24);
+            this.checkBox3.TabIndex = 5;
+            this.checkBox3.Text = "Второй уровень";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 39);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(149, 24);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Первый уровень";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
@@ -400,9 +400,9 @@ namespace MemoryMatrix
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
