@@ -143,7 +143,7 @@ namespace MemoryMatrix
             XmlText idText = xDoc.CreateTextNode($"{list.Count + 1}"); // здесь располагается номер пользователя
             XmlText loginText = xDoc.CreateTextNode($"{login}");
             XmlText maxtimeText = xDoc.CreateTextNode($"{0}");
-            XmlText mintimeText = xDoc.CreateTextNode($"{0}");
+            XmlText mintimeText = xDoc.CreateTextNode($"{60}");
             XmlText totalgamesText = xDoc.CreateTextNode($"{0}");
             XmlText levelText = xDoc.CreateTextNode($"{1}");
 
@@ -170,23 +170,66 @@ namespace MemoryMatrix
 
         }
 
-
-
-        public static String parserText(String str1)
+        public static void parsChangeValue(String nameElem, String userName) 
         {
-            String str2 = "";
-            for (int i = 0; i < str1.Length; i++)
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("records.xml");
+            XmlNodeList list = xDoc.GetElementsByTagName("user"); // Создаем и заполняем лист по тегу "user"  
+            for (int i = 0; i < list.Count; i++)
             {
-                if (str1[i] == '\'')
+                if (userName == xDoc.GetElementsByTagName("login")[i].FirstChild.Value.ToString()) 
                 {
-                    str2 += "\\\"";
-                }
-                else
+                    int count = int.Parse(xDoc.GetElementsByTagName($"{nameElem}")[i].FirstChild.Value);
+                    xDoc.GetElementsByTagName($"{nameElem}")[i].FirstChild.Value = $"{count + 1}";
+                }             
+            }
+            xDoc.Save("records.xml");
+        }
+
+        public static void parsChangeValue(String nameElem, String userName, int newValue)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("records.xml");
+            XmlNodeList list = xDoc.GetElementsByTagName("user"); // Создаем и заполняем лист по тегу "user"  
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (userName == xDoc.GetElementsByTagName("login")[i].FirstChild.Value.ToString())
                 {
-                    str2 += str1[i];
+                    int count = int.Parse(xDoc.GetElementsByTagName($"{nameElem}")[i].FirstChild.Value);
+                    xDoc.GetElementsByTagName($"{nameElem}")[i].FirstChild.Value = $"{newValue}";
                 }
             }
-            return str2;
+            xDoc.Save("records.xml");
+        }
+
+        public static int parsGettingValue(String nameElem, String userName)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("records.xml");
+            int count = 0;
+            XmlNodeList list = xDoc.GetElementsByTagName("user"); // Создаем и заполняем лист по тегу "user"  
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (userName == xDoc.GetElementsByTagName("login")[i].FirstChild.Value.ToString())
+                {
+                    count = int.Parse(xDoc.GetElementsByTagName($"{nameElem}")[i].FirstChild.Value);
+                }
+            }
+            return count;
+        }
+
+
+        public static int parsPos(char ch, String str)
+        {
+            int pos = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == ch)
+                {
+                    pos = i;
+                }
+            }
+            return pos;
         }
     }
 }

@@ -47,38 +47,38 @@ namespace MemoryMatrix
         void third_level()
         {
             LEVEL = 3;
-            pictureBoxes[4] = pictureBox6;
-            pictureBoxes[5] = pictureBox7;
+            pictureBoxes[4] = pictureBox5;
+            pictureBoxes[5] = pictureBox6;
         }
         void fourth_level()
         {
             LEVEL = 4;
-            pictureBoxes[6] = pictureBox6;
-            pictureBoxes[7] = pictureBox7;
+            pictureBoxes[6] = pictureBox7;
+            pictureBoxes[7] = pictureBox8;
         }
         void fifth_level() 
         {
             LEVEL = 5;
-            pictureBoxes[8] = pictureBox6;
-            pictureBoxes[9] = pictureBox7;
+            pictureBoxes[8] = pictureBox9;
+            pictureBoxes[9] = pictureBox10;
         }
         void sixth_level() 
         {
             LEVEL = 6;
-            pictureBoxes[10] = pictureBox6;
-            pictureBoxes[11] = pictureBox7;
+            pictureBoxes[10] = pictureBox11;
+            pictureBoxes[11] = pictureBox12;
         }
         void seventh_level()
         {
             LEVEL = 7;
-            pictureBoxes[12] = pictureBox6;
-            pictureBoxes[13] = pictureBox7;
+            pictureBoxes[12] = pictureBox13;
+            pictureBoxes[13] = pictureBox14;
         }
         void eighth_level()
         {
             LEVEL = 8;
-            pictureBoxes[14] = pictureBox6;
-            pictureBoxes[15] = pictureBox7;
+            pictureBoxes[14] = pictureBox15;
+            pictureBoxes[15] = pictureBox16;
         }
         
         void arrayInitialization()
@@ -294,57 +294,108 @@ namespace MemoryMatrix
             "Вы выиграли. Хотите продолжить?",
             "Сообщение",
             MessageBoxButtons.YesNo);
-
+                       
             if (result == DialogResult.Yes)
             {
                 timer.Stop();
-                ResetImages();
                 switch (LEVEL) 
                 {
-                    case 1: checkBox1.Checked = false;
+                    case 1:
+                        checkBox1.Checked = false;
                             checkBox2.Checked = true;
-                        start();
+                            start();
                             break;
                     case 2:
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         checkBox2.Checked = false;
                         checkBox3.Checked = true;
                         start();
                         break;
                     case 3:
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         checkBox3.Checked = false;
                         checkBox4.Checked = true;
                         start();
                         break;
                     case 4:
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         checkBox4.Checked = false;
                         checkBox5.Checked = true;
                         start();
                         break;
                     case 5:
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         checkBox5.Checked = false;
                         checkBox6.Checked = true;
                         start();
                         break;
                     case 6:
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         checkBox6.Checked = false;
                         checkBox7.Checked = true;
                         start();
                         break;
                     case 7:
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         checkBox7.Checked = false;
                         checkBox8.Checked = true;
                         start();
                         break;
                     case 8:
+                        int seconds = time;
+                        if (parser.parsGettingValue("mintime", userName()) > 60 - seconds)
+                        {
+                            parser.parsChangeValue("mintime", userName(), 60 - seconds);
+                        }
+                        if (parser.parsGettingValue("maxtime", userName()) < seconds)
+                        {
+                            parser.parsChangeValue("maxtime", userName(), seconds);
+                        }
+                        if (parser.parsGettingValue("level", userName()) < LEVEL)
+                        {
+                            parser.parsChangeValue("level", userName(), LEVEL);
+                        }
                         start();
                         break;
                 }
+                ResetImages();
             }
             else {
+                if (LEVEL == 8) 
+                {
+                    int seconds = time;
+                    if (parser.parsGettingValue("mintime", userName()) > 60 - seconds)
+                    {
+                        parser.parsChangeValue("mintime", userName(), 60 - seconds);
+                    }
+                    if(parser.parsGettingValue("maxtime", userName()) < seconds)
+                    {
+                        parser.parsChangeValue("maxtime", userName(), seconds);
+                    }
+                }
                 ResetImages();
                 timer.Stop();
                 label1.Text = $"00:60";
             }
+            
 
         }
 
@@ -363,7 +414,21 @@ namespace MemoryMatrix
             clickTimer.Interval = 1000;
             clickTimer.Tick += CKLICKTIMER_TICK;
             button1.Enabled = false;
+            parser.parsChangeValue("totalgames", $"{userName()}");
         }
+
+        private string userName() 
+        {
+            string name = "";
+            int firstPos = parser.parsPos('[', this.Text);
+            int secondPos = parser.parsPos(']', this.Text);
+            for (int i = firstPos+1; i < secondPos; i++) 
+            {
+                name += this.Text[i];
+            }
+            return name;
+        }
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
