@@ -23,6 +23,7 @@ namespace MemoryMatrix
         public Form1()
         {
             InitializeComponent();
+            button1.Enabled = false;
         }
 
         //public PictureBox[] pictureBox => Controls.OfType<PictureBox>().ToArray();
@@ -235,6 +236,33 @@ namespace MemoryMatrix
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             checkBox1.Checked = false;
+        }
+
+        login login;
+        private void войтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            login = new login(this, button1);
+            login.ShowDialog();
+        }
+
+        public void successfulLogin()
+        {
+            if (login.resultLoagin)
+            {
+                button1.Enabled = true;
+            }
+        }
+
+        StatisticsForm statics;
+        private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (statics == null)
+            {
+                statics = new StatisticsForm();
+                statics.FormClosed += (x, y) => { statics = null; }; //для избежания проблем с повторным открытием после закрытия
+            }
+            statics.Owner = this;
+            statics.Show();
         }
     }
 }
