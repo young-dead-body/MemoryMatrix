@@ -30,35 +30,127 @@ namespace MemoryMatrix
 
         PictureBox[] pictureBoxes;
 
+        int LEVEL=0;
+
+        void first_level()
+        {
+            LEVEL = 1;
+            pictureBoxes[0] = pictureBox1;
+            pictureBoxes[1] = pictureBox2;
+        }
+        void second_level()
+        {
+            LEVEL = 2;
+            pictureBoxes[2] = pictureBox3;
+            pictureBoxes[3] = pictureBox4;
+        }
+        void third_level()
+        {
+            LEVEL = 3;
+            pictureBoxes[4] = pictureBox6;
+            pictureBoxes[5] = pictureBox7;
+        }
+        void fourth_level()
+        {
+            LEVEL = 4;
+            pictureBoxes[6] = pictureBox6;
+            pictureBoxes[7] = pictureBox7;
+        }
+        void fifth_level() 
+        {
+            LEVEL = 5;
+            pictureBoxes[8] = pictureBox6;
+            pictureBoxes[9] = pictureBox7;
+        }
+        void sixth_level() 
+        {
+            LEVEL = 6;
+            pictureBoxes[10] = pictureBox6;
+            pictureBoxes[11] = pictureBox7;
+        }
+        void seventh_level()
+        {
+            LEVEL = 7;
+            pictureBoxes[12] = pictureBox6;
+            pictureBoxes[13] = pictureBox7;
+        }
+        void eighth_level()
+        {
+            LEVEL = 8;
+            pictureBoxes[14] = pictureBox6;
+            pictureBoxes[15] = pictureBox7;
+        }
+        
         void arrayInitialization()
         {
             if (checkBox1.Checked) {
-                pictureBoxes = new PictureBox[4];
-                pictureBoxes[0] = pictureBox1;
-                pictureBoxes[1] = pictureBox2;
-                pictureBoxes[2] = pictureBox3;
-                pictureBoxes[3] = pictureBox4;
+                pictureBoxes = new PictureBox[2];
+                first_level();
             }
             if (checkBox2.Checked)
             {
-                pictureBoxes = new PictureBox[16];
-                pictureBoxes[0] = pictureBox1;
-                pictureBoxes[1] = pictureBox2;
-                pictureBoxes[2] = pictureBox3;
-                pictureBoxes[3] = pictureBox4;
-                pictureBoxes[4] = pictureBox5;
-                pictureBoxes[5] = pictureBox6;
-                pictureBoxes[6] = pictureBox7;
-                pictureBoxes[7] = pictureBox8;
-                pictureBoxes[8] = pictureBox9;
-                pictureBoxes[9] = pictureBox10;
-                pictureBoxes[10] = pictureBox11;
-                pictureBoxes[11] = pictureBox12;
-                pictureBoxes[12] = pictureBox13;
-                pictureBoxes[13] = pictureBox14;
-                pictureBoxes[14] = pictureBox15;
-                pictureBoxes[15] = pictureBox16;
+                pictureBoxes = new PictureBox[4];
+                first_level();
+                second_level();
             }
+            if (checkBox3.Checked)
+            {
+                pictureBoxes = new PictureBox[6];
+                first_level();
+                second_level();
+                third_level();
+            }
+            if (checkBox4.Checked)
+            {
+                pictureBoxes = new PictureBox[8];
+                first_level();
+                second_level();
+                third_level();
+                fourth_level();
+            }
+            if (checkBox5.Checked)
+            {
+                pictureBoxes = new PictureBox[10];
+                first_level();
+                second_level();
+                third_level();
+                fourth_level();
+                fifth_level();
+            }
+            if (checkBox6.Checked)
+            {
+                pictureBoxes = new PictureBox[12];
+                first_level();
+                second_level();
+                third_level();
+                fourth_level();
+                fifth_level();
+                sixth_level();
+            }
+            if (checkBox7.Checked)
+            {
+                pictureBoxes = new PictureBox[14];
+                first_level();
+                second_level();
+                third_level();
+                fourth_level();
+                fifth_level();
+                sixth_level();
+                seventh_level();
+            }
+            if (checkBox8.Checked)
+            {
+                pictureBoxes = new PictureBox[16];
+                first_level();
+                second_level();
+                third_level();
+                fourth_level();
+                fifth_level();
+                sixth_level();
+                seventh_level();
+                eighth_level();
+            }
+
             for (int i = 0; i < pictureBoxes.Length; i++) 
             {
                 pictureBoxes[i].Tag = null;
@@ -207,6 +299,46 @@ namespace MemoryMatrix
             {
                 timer.Stop();
                 ResetImages();
+                switch (LEVEL) 
+                {
+                    case 1: checkBox1.Checked = false;
+                            checkBox2.Checked = true;
+                        start();
+                            break;
+                    case 2:
+                        checkBox2.Checked = false;
+                        checkBox3.Checked = true;
+                        start();
+                        break;
+                    case 3:
+                        checkBox3.Checked = false;
+                        checkBox4.Checked = true;
+                        start();
+                        break;
+                    case 4:
+                        checkBox4.Checked = false;
+                        checkBox5.Checked = true;
+                        start();
+                        break;
+                    case 5:
+                        checkBox5.Checked = false;
+                        checkBox6.Checked = true;
+                        start();
+                        break;
+                    case 6:
+                        checkBox6.Checked = false;
+                        checkBox7.Checked = true;
+                        start();
+                        break;
+                    case 7:
+                        checkBox7.Checked = false;
+                        checkBox8.Checked = true;
+                        start();
+                        break;
+                    case 8:
+                        start();
+                        break;
+                }
             }
             else {
                 ResetImages();
@@ -217,6 +349,11 @@ namespace MemoryMatrix
         }
 
         private void startGame(object sender, EventArgs e)
+        {
+            start();
+        }
+
+        void start() 
         {
             allowClick = true;
             arrayInitialization();
