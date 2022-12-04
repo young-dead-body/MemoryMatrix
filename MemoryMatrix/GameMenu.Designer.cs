@@ -1,7 +1,7 @@
 ﻿
 namespace MemoryMatrix
 {
-    partial class Form1
+    partial class GameMenu
     {
         /// <summary>
         ///  Required designer variable.

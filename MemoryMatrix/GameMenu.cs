@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MemoryMatrix
 {
-    public partial class Form1 : Form
+    public partial class GameMenu : Form
     {
         bool allowClick = false;
         PictureBox firstGuess;
@@ -20,7 +20,7 @@ namespace MemoryMatrix
         int time = 60;
         Timer timer = new Timer { Interval = 1000 };
 
-        public Form1()
+        public GameMenu()
         {
             InitializeComponent();
             button1.Enabled = false;
