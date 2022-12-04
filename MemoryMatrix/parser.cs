@@ -79,6 +79,99 @@ namespace MemoryMatrix
             return statiscicsList;
         }
 
+        public static bool parsRegistrationLoader(String login, String password) 
+        {
+            XmlDocument xDoc = new XmlDocument();
+            XmlNodeList list = xDoc.GetElementsByTagName("user"); // Создаем и заполняем лист по тегу "user"
+            xDoc.Load("loader.xml");
+            XmlElement? xRoot = xDoc.DocumentElement;
+
+            // создаем новый элемент person
+            XmlElement userElem = xDoc.CreateElement("user");
+
+            // создаем атрибут name
+            XmlAttribute idAttr = xDoc.CreateAttribute("id");
+
+            // создаем элементы company и age
+            XmlElement loginElem = xDoc.CreateElement("login");
+            XmlElement passwordElem = xDoc.CreateElement("password");
+
+            // создаем текстовые значения для элементов и атрибута
+            XmlText idText = xDoc.CreateTextNode($"{list.Count+1}"); // здесь располагается номер пользователя
+            XmlText loginText = xDoc.CreateTextNode($"{login}");
+            XmlText passwordText = xDoc.CreateTextNode($"{password}");
+
+            //добавляем узлы
+            idAttr.AppendChild(idText);
+            loginElem.AppendChild(loginText);
+            passwordElem.AppendChild(passwordText);
+
+            // добавляем атрибут name
+            userElem.Attributes.Append(idAttr);
+            // добавляем элементы company и age
+            userElem.AppendChild(loginElem);
+            userElem.AppendChild(passwordElem);
+            // добавляем в корневой элемент новый элемент person
+            xRoot?.AppendChild(userElem);
+            // сохраняем изменения xml-документа в файл
+            xDoc.Save("loader.xml");
+
+            return true;
+        }
+
+        public static void parsRegistrationStatistics(String login)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            XmlNodeList list = xDoc.GetElementsByTagName("user"); // Создаем и заполняем лист по тегу "user"
+            xDoc.Load("records.xml");
+            XmlElement? xRoot = xDoc.DocumentElement;
+
+            // создаем новый элемент person
+            XmlElement userElem = xDoc.CreateElement("user");
+
+            // создаем атрибут name
+            XmlAttribute idAttr = xDoc.CreateAttribute("id");
+
+            // создаем элементы company и age
+            XmlElement loginElem = xDoc.CreateElement("login");
+            XmlElement maxtimeElem = xDoc.CreateElement("maxtime");
+            XmlElement mintimeElem = xDoc.CreateElement("mintime");
+            XmlElement totalgamesElem = xDoc.CreateElement("totalgames");
+            XmlElement levelElem = xDoc.CreateElement("level");
+
+            // создаем текстовые значения для элементов и атрибута
+            XmlText idText = xDoc.CreateTextNode($"{list.Count + 1}"); // здесь располагается номер пользователя
+            XmlText loginText = xDoc.CreateTextNode($"{login}");
+            XmlText maxtimeText = xDoc.CreateTextNode($"{0}");
+            XmlText mintimeText = xDoc.CreateTextNode($"{0}");
+            XmlText totalgamesText = xDoc.CreateTextNode($"{0}");
+            XmlText levelText = xDoc.CreateTextNode($"{1}");
+
+            //добавляем узлы
+            idAttr.AppendChild(idText);
+            loginElem.AppendChild(loginText);
+            maxtimeElem.AppendChild(maxtimeText);
+            mintimeElem.AppendChild(mintimeText);
+            totalgamesElem.AppendChild(totalgamesText);
+            levelElem.AppendChild(levelText);
+
+            // добавляем атрибут name
+            userElem.Attributes.Append(idAttr);
+            // добавляем элементы company и age
+            userElem.AppendChild(loginElem);
+            userElem.AppendChild(maxtimeElem);
+            userElem.AppendChild(mintimeElem);
+            userElem.AppendChild(totalgamesElem);
+            userElem.AppendChild(levelElem);
+            // добавляем в корневой элемент новый элемент person
+            xRoot?.AppendChild(userElem);
+            // сохраняем изменения xml-документа в файл
+            xDoc.Save("records.xml");
+
+        }
+
+
+
         public static String parserText(String str1)
         {
             String str2 = "";

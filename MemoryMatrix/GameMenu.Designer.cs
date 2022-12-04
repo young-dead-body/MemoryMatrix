@@ -370,6 +370,7 @@ namespace MemoryMatrix
             this.зарегистрироватьсяToolStripMenuItem.Name = "зарегистрироватьсяToolStripMenuItem";
             this.зарегистрироватьсяToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.зарегистрироватьсяToolStripMenuItem.Text = "Зарегистрироваться";
+            this.зарегистрироватьсяToolStripMenuItem.Click += new System.EventHandler(this.зарегистрироватьсяToolStripMenuItem_Click);
             // 
             // статистикаToolStripMenuItem
             // 
@@ -378,7 +379,7 @@ namespace MemoryMatrix
             this.статистикаToolStripMenuItem.Text = "Статистика";
             this.статистикаToolStripMenuItem.Click += new System.EventHandler(this.статистикаToolStripMenuItem_Click);
             // 
-            // Form1
+            // GameMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -387,7 +388,7 @@ namespace MemoryMatrix
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "GameMenu";
             this.Text = "Игра \"Matrix Memory\"";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();

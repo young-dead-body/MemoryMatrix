@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MemoryMatrix
@@ -22,31 +23,71 @@ namespace MemoryMatrix
             InitializeComponent();
             parentForm = form;
             buttonMF = button;
-
         }
+
+        public login(Form form, Button button, String nameForm)
+        {
+            InitializeComponent();
+            parentForm = form;
+            buttonMF = button;
+            this.Text = nameForm;
+            this.label1.Text = "Введите ваше имя";
+            this.label2.Text = "Придумайте пароль";
+        }
+
         Form parentForm;
 
         public bool resultLoagin;
+
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "" && textBox2.Text != "")
+            String name = textBox1.Text;
+            String pass = textBox2.Text;
+            var re = new Regex(@"[\[\]+\\':;@#№$%|!^?&*()/_={}.,<>]+");
+            name = re.Replace(name, "");
+            pass = re.Replace(pass, "");
+
+            if (name != "" && pass != "")
             {
                 String login = textBox1.Text;
                 String password = textBox2.Text;
 
-                bool start = parser.parsLoader(login, password);
-                resultLoagin = start;
-                if (start)
+                if (this.Text == "Вход")
                 {
-                    //=======================================
-                    Handler.closeLoginForm(login, parentForm);
-                    buttonMF.Enabled = true;
-                    Close();
+                    bool start = parser.parsLoader(login, password);
+                    resultLoagin = start;
+                    if (start)
+                    {
+                        //=======================================
+                        Handler.closeLoginForm(login, parentForm);
+                        buttonMF.Enabled = true;
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error login/password", "error");
+                    }
                 }
-                else
+                else 
                 {
-                    MessageBox.Show("Error login/password", "error");
+                    bool start = parser.parsRegistrationLoader(login, password);
+                    resultLoagin = start;
+                    if (start)
+                    {
+                        //=======================================
+                        Handler.closeLoginForm(login, parentForm);
+                        buttonMF.Enabled = true;
+                        Close();
+                        parser.parsRegistrationStatistics(login);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error login/password", "error");
+                    }
                 }
+            }
+            else {
+                MessageBox.Show("Упс..Наверное вы забыли внести данные", "Ошибка ввода");
             }
         }
     }

@@ -264,5 +264,11 @@ namespace MemoryMatrix
             statics.Owner = this;
             statics.Show();
         }
+
+        private void зарегистрироватьсяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            login = new login(this, button1, "Регистрация");
+            login.ShowDialog();
+        }
     }
 }
