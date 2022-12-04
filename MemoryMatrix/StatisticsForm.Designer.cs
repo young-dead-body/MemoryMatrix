@@ -41,14 +41,14 @@ namespace MemoryMatrix
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(746, 370);
+            this.dataGridView1.Size = new System.Drawing.Size(679, 370);
             this.dataGridView1.TabIndex = 0;
             // 
             // StatisticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 370);
+            this.ClientSize = new System.Drawing.Size(679, 370);
             this.Controls.Add(this.dataGridView1);
             this.Name = "StatisticsForm";
             this.Text = "Статистика";
