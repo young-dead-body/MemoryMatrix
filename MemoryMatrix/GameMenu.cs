@@ -472,5 +472,10 @@ namespace MemoryMatrix
             login = new login(this, button1, "Регистрация");
             login.ShowDialog();
         }
+
+        private void информацияОПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Данное программное приложение было разработано студентом группы 18ВО1 Савиным Дмитрием", "Информация о программе");
+        }
     }
 }
