@@ -23,6 +23,7 @@ namespace MemoryMatrix
         public GameMenu()
         {
             InitializeComponent();
+            checkBoxesInitsialization();
             button1.Enabled = false;
         }
 
@@ -80,18 +81,21 @@ namespace MemoryMatrix
             pictureBoxes[14] = pictureBox15;
             pictureBoxes[15] = pictureBox16;
         }
-        
-        void arrayInitialization()
+
+        bool check = false;
+        bool arrayInitialization()
         {
             if (checkBox1.Checked) {
                 pictureBoxes = new PictureBox[2];
                 first_level();
+                check = true;
             }
             if (checkBox2.Checked)
             {
                 pictureBoxes = new PictureBox[4];
                 first_level();
                 second_level();
+                check = true;
             }
             if (checkBox3.Checked)
             {
@@ -99,6 +103,7 @@ namespace MemoryMatrix
                 first_level();
                 second_level();
                 third_level();
+                check = true;
             }
             if (checkBox4.Checked)
             {
@@ -107,6 +112,7 @@ namespace MemoryMatrix
                 second_level();
                 third_level();
                 fourth_level();
+                check = true;
             }
             if (checkBox5.Checked)
             {
@@ -116,6 +122,7 @@ namespace MemoryMatrix
                 third_level();
                 fourth_level();
                 fifth_level();
+                check = true;
             }
             if (checkBox6.Checked)
             {
@@ -126,6 +133,7 @@ namespace MemoryMatrix
                 fourth_level();
                 fifth_level();
                 sixth_level();
+                check = true;
             }
             if (checkBox7.Checked)
             {
@@ -137,6 +145,7 @@ namespace MemoryMatrix
                 fifth_level();
                 sixth_level();
                 seventh_level();
+                check = true;
             }
             if (checkBox8.Checked)
             {
@@ -149,12 +158,19 @@ namespace MemoryMatrix
                 sixth_level();
                 seventh_level();
                 eighth_level();
+                check = true;
+            }
+            if (check == false)
+            {
+                return check;
             }
 
             for (int i = 0; i < pictureBoxes.Length; i++) 
             {
                 pictureBoxes[i].Tag = null;
+                pictureBoxes[i].Image = null;
             }
+            return check;
         }
 
         private static IEnumerable<Image> images
@@ -183,8 +199,32 @@ namespace MemoryMatrix
                 if (time < 0)
                 {
                     timer.Stop();
-                    MessageBox.Show("Время вышло...");
-                    ResetImages();
+
+                    MessageBox.Show("Время вышло...",
+                                "Сообщение");
+                    time = 60;
+                    label1.Text = "00:60";
+                    for (int i = 0; i < pictureBoxes.Length; i++)
+                    {
+                        pictureBoxes[i].Tag = null;
+                        pictureBoxes[i].Image = null;
+                    }
+                    button1.Enabled = true;
+                    updateLevel();
+                    /*ResetImages();
+                    if (result == DialogResult.Yes) //надо понять почему тут анархия 
+                    {
+                        if (LEVEL != 1)
+                        {
+                            LEVEL--;
+                            time = 60;
+                            timer.Start();
+                            updateLevel();
+                        }
+                        
+                        
+                        
+                    }*/
                 }
 
                 var ssTime = TimeSpan.FromSeconds(time);
@@ -202,6 +242,119 @@ namespace MemoryMatrix
             };
         }
 
+        CheckBox[] checkBoxes;
+
+        void checkBoxesInitsialization() 
+        {
+            checkBoxes = new CheckBox[8];
+            checkBoxes[0] = checkBox1;
+            checkBoxes[1] = checkBox2;
+            checkBoxes[2] = checkBox3;
+            checkBoxes[3] = checkBox4;
+            checkBoxes[4] = checkBox5;
+            checkBoxes[5] = checkBox6;
+            checkBoxes[6] = checkBox7;
+            checkBoxes[7] = checkBox8;
+        }
+
+        void checkBoxesUpdate() 
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+        }
+        private void checkLevel() //проверка на каком уровне был пользователь
+        {
+
+            int level = parser.parsGettingValue("level", userName());
+
+            var result = MessageBox.Show($"{userName()}, выхотели бы продолжить с {level} уровня?","Сообщение",MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                switch (level)
+                {
+                    case 1:
+                        checkBoxesUpdate();
+                        checkBox1.Checked = true;
+                        break;
+                    case 2:
+                        checkBoxesUpdate();
+                        checkBox2.Checked = true;
+                        break;
+                    case 3:
+                        checkBoxesUpdate();
+                        checkBox3.Checked = true;
+                        break;
+                    case 4:
+                        checkBoxesUpdate();
+                        checkBox4.Checked = true;
+                        break;
+                    case 5:
+                        checkBoxesUpdate();
+                        checkBox5.Checked = true;
+                        break;
+                    case 6:
+                        checkBoxesUpdate();
+                        checkBox6.Checked = true;
+                        break;
+                    case 7:
+                        checkBoxesUpdate();
+                        checkBox7.Checked = true;
+                        break;
+                    case 8:
+                        checkBoxesUpdate();
+                        checkBox8.Checked = true;
+                        break;
+                }
+            }  
+        }
+
+        public void postLoad() 
+        {
+            checkBoxesInitsialization();
+            checkLevel();
+        }
+
+        private void updateLevel() 
+        {
+            switch (LEVEL) 
+            {
+                case 1:
+                    checkBox2.Checked = false;
+                    checkBox1.Checked = true;
+                    break;
+                case 2:
+                    checkBox3.Checked = false;
+                    checkBox2.Checked = true;
+                    break;
+                case 3:
+                    checkBox4.Checked = false;
+                    checkBox3.Checked = true;
+                    break;
+                case 4:
+                    checkBox5.Checked = false;
+                    checkBox4.Checked = true;
+                    break;
+                case 5:
+                    checkBox6.Checked = false;
+                    checkBox5.Checked = true;
+                    break;
+                case 6:
+                    checkBox7.Checked = false;
+                    checkBox6.Checked = true;
+                    break;
+                case 7:
+                    checkBox8.Checked = false;
+                    checkBox7.Checked = true;
+                    break;
+            }
+        }
+
         private void ResetImages()
         {
             foreach (var pic in pictureBoxes)
@@ -217,7 +370,7 @@ namespace MemoryMatrix
             button1.Enabled = true;
         }
 
-        private void HideImages()
+        private void HideImages() 
         {
             foreach (var pic in pictureBoxes)
             {
@@ -407,14 +560,22 @@ namespace MemoryMatrix
         void start() 
         {
             allowClick = true;
-            arrayInitialization();
-            setRandomImages();
-            HideImages();
-            startGameTimer();
-            clickTimer.Interval = 1000;
-            clickTimer.Tick += CKLICKTIMER_TICK;
-            button1.Enabled = false;
-            parser.parsChangeValue("totalgames", $"{userName()}");
+            if (arrayInitialization())
+            {
+                setRandomImages();
+                HideImages();
+                startGameTimer();
+                clickTimer.Interval = 1000;
+                clickTimer.Tick += CKLICKTIMER_TICK;
+                button1.Enabled = false;
+                parser.parsChangeValue("totalgames", $"{userName()}");
+            }
+            else 
+            {
+                MessageBox.Show("Выберите уровень");
+            }
+            
+            
         }
 
         private string userName() 
@@ -433,11 +594,97 @@ namespace MemoryMatrix
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             checkBox1.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox7.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox8.Checked = false;
+            //checkBoxesUpdate();
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            checkBox6.Checked = false;
+            checkBox7.Checked = false;
+            //checkBoxesUpdate();
         }
 
         login login;
@@ -477,5 +724,6 @@ namespace MemoryMatrix
         {
             MessageBox.Show("Данное программное приложение было разработано студентом группы 18ВО1 Савиным Дмитрием", "Информация о программе");
         }
+
     }
 }

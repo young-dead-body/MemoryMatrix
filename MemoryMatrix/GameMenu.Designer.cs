@@ -308,6 +308,7 @@ namespace MemoryMatrix
             this.checkBox8.TabIndex = 10;
             this.checkBox8.Text = "Восьмой уровень";
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -318,6 +319,7 @@ namespace MemoryMatrix
             this.checkBox7.TabIndex = 9;
             this.checkBox7.Text = "Седьмой уровень";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
             // 
             // checkBox6
             // 
@@ -328,6 +330,7 @@ namespace MemoryMatrix
             this.checkBox6.TabIndex = 8;
             this.checkBox6.Text = "Шестой уровень";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // checkBox5
             // 
@@ -338,6 +341,7 @@ namespace MemoryMatrix
             this.checkBox5.TabIndex = 7;
             this.checkBox5.Text = "Пятый уровень";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -348,6 +352,7 @@ namespace MemoryMatrix
             this.checkBox4.TabIndex = 6;
             this.checkBox4.Text = "Четвертый уровень";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -358,6 +363,7 @@ namespace MemoryMatrix
             this.checkBox3.TabIndex = 5;
             this.checkBox3.Text = "Третий уровень";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // checkBox1
             // 

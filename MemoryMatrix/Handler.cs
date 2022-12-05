@@ -9,7 +9,7 @@ namespace MemoryMatrix
     {
         public static void closeLoginForm(String userName, Form form)
         {
-            form.Text = $"Главное меню [{userName}]";
+            form.Text += $" [{userName}]";
         }
 
         

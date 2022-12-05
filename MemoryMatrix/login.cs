@@ -18,14 +18,14 @@ namespace MemoryMatrix
 
         Button buttonMF;
 
-        public login(Form form, Button button)
+        public login(GameMenu form, Button button)
         {
             InitializeComponent();
             parentForm = form;
             buttonMF = button;
         }
 
-        public login(Form form, Button button, String nameForm)
+        public login(GameMenu form, Button button, String nameForm)
         {
             InitializeComponent();
             parentForm = form;
@@ -35,7 +35,7 @@ namespace MemoryMatrix
             this.label2.Text = "Придумайте пароль";
         }
 
-        Form parentForm;
+        GameMenu parentForm;
 
         public bool resultLoagin;
 
@@ -61,6 +61,7 @@ namespace MemoryMatrix
                         //=======================================
                         Handler.closeLoginForm(login, parentForm);
                         buttonMF.Enabled = true;
+                        parentForm.postLoad();
                         Close();
                     }
                     else
