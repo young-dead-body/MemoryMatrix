@@ -190,6 +190,8 @@ namespace MemoryMatrix
             }
         }
 
+
+        int checkTime = 0;
         private void startGameTimer()
         {
             timer.Start();
@@ -211,34 +213,46 @@ namespace MemoryMatrix
                     }
                     button1.Enabled = true;
                     updateLevel();
-                    /*ResetImages();
-                    if (result == DialogResult.Yes) //надо понять почему тут анархия 
-                    {
-                        if (LEVEL != 1)
-                        {
-                            LEVEL--;
-                            time = 60;
-                            timer.Start();
-                            updateLevel();
-                        }
-                        
-                        
-                        
-                    }*/
                 }
 
                 var ssTime = TimeSpan.FromSeconds(time);
 
-                int seconds = time;
-                if (seconds > 15)
+                var security = resources.question;
+                if (checkTime <= 5)
                 {
-                    label1.ForeColor = Color.Black;
+                    if (checkTime == 0) 
+                    {
+                        
+                        foreach (var pic in pictureBoxes)
+                        {
+                            pic.Image = (Image)pic.Tag;
+                        }
+                    }
+                    label1.Text = $"00:{5 - checkTime}";
+                    checkTime++;
+                    time = 60;
+                    if (checkTime == 5) 
+                    {
+                        foreach (var pic in pictureBoxes)
+                        {
+                            pic.Image = security;
+                        }
+                    }
                 }
-                else
+                else 
                 {
-                    label1.ForeColor = Color.Red;
+                    int seconds = time;
+                    if (seconds > 15)
+                    {
+                        label1.ForeColor = Color.Black;
+                    }
+                    else
+                    {
+                        label1.ForeColor = Color.Red;
+                    }
+                    label1.Text = $"00:{seconds}";
                 }
-                label1.Text = $"00:{seconds}";
+               
             };
         }
 
@@ -355,6 +369,7 @@ namespace MemoryMatrix
             }
         }
 
+        
         private void ResetImages()
         {
             foreach (var pic in pictureBoxes)
@@ -366,6 +381,8 @@ namespace MemoryMatrix
             HideImages();
             setRandomImages();
             time = 60;
+
+
             timer.Start();
             button1.Enabled = true;
         }
@@ -404,7 +421,7 @@ namespace MemoryMatrix
 
 
         private void CKLICKTIMER_TICK(object sender, EventArgs e) // хз пока что
-        {
+        {            
             HideImages();
 
             allowClick = true;
@@ -562,8 +579,9 @@ namespace MemoryMatrix
             allowClick = true;
             if (arrayInitialization())
             {
+                checkTime = 0;
                 setRandomImages();
-                HideImages();
+                //HideImages();
                 startGameTimer();
                 clickTimer.Interval = 1000;
                 clickTimer.Tick += CKLICKTIMER_TICK;
@@ -725,5 +743,10 @@ namespace MemoryMatrix
             MessageBox.Show("Данное программное приложение было разработано студентом группы 18ВО1 Савиным Дмитрием", "Информация о программе");
         }
 
+        int START = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            START++;
+        }
     }
 }

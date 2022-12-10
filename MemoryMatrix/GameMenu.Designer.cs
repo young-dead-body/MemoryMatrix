@@ -29,6 +29,7 @@ namespace MemoryMatrix
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
@@ -65,6 +66,7 @@ namespace MemoryMatrix
             this.зарегистрироватьсяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.информацияОПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
@@ -466,6 +468,11 @@ namespace MemoryMatrix
             this.информацияОПрограммеToolStripMenuItem.Text = "Информация о программе";
             this.информацияОПрограммеToolStripMenuItem.Click += new System.EventHandler(this.информацияОПрограммеToolStripMenuItem_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 100;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // GameMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -542,6 +549,7 @@ namespace MemoryMatrix
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.ToolStripMenuItem информацияОПрограммеToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

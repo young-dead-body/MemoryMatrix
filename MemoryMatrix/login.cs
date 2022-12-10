@@ -33,6 +33,8 @@ namespace MemoryMatrix
             this.Text = nameForm;
             this.label1.Text = "Введите ваше имя";
             this.label2.Text = "Придумайте пароль";
+            this.Имя.Text = "Зарегистрироваться";
+            this.Имя.Width = 170;
         }
 
         GameMenu parentForm;
